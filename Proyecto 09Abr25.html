@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso de Buenas Prácticas Clínicas</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('https://raw.githubusercontent.com/Carminayg/Proyecto1imagenes/main/fondo.jpg');
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding: 1rem;
+      background-color: rgba(240, 248, 255, 0.9);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    header img {
+      max-width: 150px;
+    }
+    section {
+      background-color: rgba(255, 255, 255, 0.95);
+      margin: 1rem auto;
+      padding: 1rem;
+      border-radius: 12px;
+      max-width: 800px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      color: #004080;
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .formulario input, .formulario textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .formulario button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .formulario button:hover {
+      background-color: #0056b3;
+    }
+    #mensajeConfirmacion {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 1rem;
+      border-radius: 8px;
+      display: none;
+      margin-top: 1rem;
+    }
+    #felicidadesImagen {
+      display: none;
+      text-align: center;
+    }
+    #felicidadesImagen img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 12px;
+    }
+    @media (max-width: 600px) {
+      section {
+        margin: 0.5rem;
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://raw.githubusercontent.com/Carminayg/Proyecto2logo/main/logo.png" alt="Logo del Proyecto">
+    <h1>Curso de Buenas Prácticas Clínicas</h1>
+  </header>
+
+  <section id="internacional">
+    <h2>Guía Internacional y Desarrollo Histórico</h2>
+    <p>Basado en la guía ICH E6(R3), se explican las buenas prácticas clínicas con su historia...</p>
+    <details>
+      <summary>Resumen Profesional - ICH E6(R3)</summary>
+      <p>1. Principios Generales...</p>
+      <p>2. Responsabilidades del Patrocinador e Investigador...</p>
+      <p>3. Manejo de Datos y Documentación...</p>
+      <p>4. Apéndices...</p>
+    </details>
+  </section>
+
+  <section id="nacional">
+    <h2>Regulación Nacional</h2>
+    <p>Incluye:</p>
+    <ul>
+      <li>NOM-012-SSA3-2012</li>
+      <li>NOM-004-SSA3-2012</li>
+      <li>Reglamento de la Ley General de Salud (DOF 02-04-2014)</li>
+    </ul>
+  </section>
+
+  <section id="digipris">
+    <h2>Plataforma DIGIPRIS</h2>
+    <p>Herramienta para la gestión de solicitudes clínicas. Uso principal: Autorización de ensayos clínicos.</p>
+    <p><strong>Cédula de Evaluación Cofepris</strong> - 22 de mayo de 2024: [Adjunta aquí el documento o enlace]</p>
+  </section>
+
+  <section id="otras">
+    <h2>Otras Consideraciones Internacionales</h2>
+    <p>Pautas Éticas Internacionales para la Investigación Relacionada con la Salud con Seres Humanos (CIOMS).</p>
+  </section>
+
+  <section id="formulario" class="formulario">
+    <h2>Formulario de Retroalimentación</h2>
+    <form id="feedbackForm">
+      <input type="text" name="nombre" placeholder="Tu nombre" required>
+      <textarea name="comentarios" placeholder="Comentarios..." required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+    <div id="mensajeConfirmacion">
+      ✅ Felicidades por haber concluido.<br>
+      ⏳ Tómate un tiempo para una retroalimentación general<br>
+      🎉 Programa tu evaluación final.
+      <div id="calendario"></div>
+    </div>
+  </section>
+
+  <div id="felicidadesImagen">
+    <img src="https://raw.githubusercontent.com/Carminayg/Proyecto1imagenes/main/felicidades.jpg" alt="Felicidades">
+  </div>
+
+  <script>
+    document.getElementById('feedbackForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      fetch('https://script.google.com/macros/s/AKfycbwqkIOnrvtAlrmEtrGKkGku2HvRWF5fkBIkEIxtMuOcVLEMJiTs28IfXWPCAhge6m1Kow/exec', {
+        method: 'POST',
+        body: data
+      })
+      .then(response => response.text())
+      .then(result => {
+        document.getElementById('mensajeConfirmacion').style.display = 'block';
+        document.getElementById('felicidadesImagen').style.display = 'block';
+        document.getElementById('formulario').style.display = 'none';
+        generarCalendario();
+        setTimeout(() => {
+          document.getElementById('mensajeConfirmacion').style.display = 'none';
+          e.target.reset();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 5000);
+      })
+      .catch(error => console.error('Error:', error));
+    });
+
+    function generarCalendario() {
+      const contenedor = document.getElementById('calendario');
+      const hoy = new Date();
+      let calendarioHTML = '<ul>';
+      for (let i = 0; i < 60; i++) {
+        const fecha = new Date();
+        fecha.setDate(hoy.getDate() + i);
+        calendarioHTML += `<li>${fecha.toLocaleDateString()}</li>`;
+      }
+      calendarioHTML += '</ul>';
+      contenedor.innerHTML = calendarioHTML;
+    }
+  </script>
+</body>
+</html>
